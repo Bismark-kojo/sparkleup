@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — SparkleUp</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green: #1e4a32; --green-mid: #2d6a48; --green-light: #3d8a5e;
+      --cream: #f5f0e8; --cream-dark: #ede7d8; --white: #fdfcfa;
+      --charcoal: #1a1a1a; --muted: #6b7366; --accent: #c8a96e;
+      --accent-light: #f0e4c8; --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', sans-serif; --radius: 12px;
+      --shadow: 0 4px 24px rgba(30,74,50,0.10);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--white); color: var(--charcoal); overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 5%; background: rgba(253,252,250,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(30,74,50,0.08); transition: box-shadow .3s; }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(30,74,50,0.10); }
+    .logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--green); text-decoration: none; letter-spacing: -.5px; }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { font-size: .9rem; font-weight: 500; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--green); }
+    .nav-cta { display: flex; gap: 12px; align-items: center; }
+    .btn-outline { padding: 9px 22px; border: 1.5px solid var(--green); background: transparent; color: var(--green); font-family: var(--font-body); font-size: .875rem; font-weight: 600; border-radius: 100px; cursor: pointer; transition: all .2s; text-decoration: none; }
+    .btn-outline:hover { background: var(--green); color: var(--white); }
+    .btn-primary { padding: 9px 22px; border: none; background: var(--green); color: var(--white); font-family: var(--font-body); font-size: .875rem; font-weight: 600; border-radius: 100px; cursor: pointer; transition: all .2s; text-decoration: none; }
+    .btn-primary:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+    /* PAGE HERO */
+    .page-hero { padding: 140px 5% 80px; background: var(--cream); position: relative; overflow: hidden; }
+    .page-hero::after { content: ''; position: absolute; right: -80px; bottom: -80px; width: 480px; height: 480px; background: radial-gradient(circle, rgba(200,169,110,.15) 0%, transparent 70%); border-radius: 50%; }
+    .page-hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
+    .page-tag { display: inline-block; padding: 5px 16px; background: var(--accent-light); color: #8a6a20; border-radius: 100px; font-size: .78rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; }
+    .page-hero h1 { font-family: var(--font-display); font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 700; color: var(--green); line-height: 1.1; margin-bottom: 20px; }
+    .page-hero h1 em { font-style: italic; color: var(--accent); }
+    .page-hero p { font-size: 1.05rem; color: var(--muted); line-height: 1.75; margin-bottom: 16px; }
+
+    /* STATS BOX */
+    .stats-box { background: var(--green); border-radius: 24px; padding: 40px 32px; color: var(--white); display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .stat-item .num { font-family: var(--font-display); font-size: 2.8rem; font-weight: 700; color: var(--accent); line-height: 1; }
+    .stat-item .lbl { font-size: .88rem; color: rgba(255,255,255,.7); margin-top: 6px; line-height: 1.4; }
+
+    /* SECTION STYLES */
+    .content-section { padding: 80px 5%; }
+    .content-section.bg-cream { background: var(--cream); }
+    .content-section.bg-green { background: var(--green); }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-tag { font-size: .75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; color: var(--green); line-height: 1.2; margin-bottom: 14px; }
+    .section-title.light { color: var(--white); }
+    .section-sub { font-size: 1rem; color: var(--muted); max-width: 600px; line-height: 1.75; margin-bottom: 48px; }
+    .section-sub.light { color: rgba(255,255,255,.65); }
+
+    /* MISSION / VALUES */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .mission-text h3 { font-family: var(--font-display); font-size: 1.4rem; color: var(--green); margin-bottom: 14px; }
+    .mission-text p { font-size: .95rem; color: var(--muted); line-height: 1.8; margin-bottom: 20px; }
+    .blockquote { background: var(--accent-light); border-left: 4px solid var(--accent); border-radius: 0 12px 12px 0; padding: 20px 24px; font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: var(--green); line-height: 1.55; margin: 24px 0; }
+
+    .values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .value-card { background: var(--white); border-radius: 16px; padding: 24px; border: 1.5px solid var(--cream-dark); transition: border-color .2s; }
+    .value-card:hover { border-color: var(--green-light); }
+    .value-icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .value-card h4 { font-family: var(--font-display); font-size: 1rem; color: var(--green); margin-bottom: 8px; }
+    .value-card p { font-size: .87rem; color: var(--muted); line-height: 1.6; }
+
+    /* HOW IT WORKS - DETAILED */
+    .process-timeline { position: relative; padding-left: 48px; }
+    .process-timeline::before { content: ''; position: absolute; left: 14px; top: 0; bottom: 0; width: 2px; background: var(--cream-dark); }
+    .process-step { position: relative; margin-bottom: 44px; }
+    .process-step:last-child { margin-bottom: 0; }
+    .step-dot { position: absolute; left: -40px; top: 4px; width: 28px; height: 28px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 700; color: var(--white); border: 3px solid var(--white); box-shadow: 0 0 0 2px var(--green); }
+    .process-step h4 { font-family: var(--font-display); font-size: 1.15rem; color: var(--green); margin-bottom: 8px; }
+    .process-step p { font-size: .92rem; color: var(--muted); line-height: 1.7; }
+    .process-step .step-detail { margin-top: 12px; background: var(--cream); border-radius: var(--radius); padding: 14px 18px; font-size: .88rem; color: var(--charcoal); line-height: 1.6; }
+
+    /* TRUST & SAFETY */
+    .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .trust-card { background: rgba(255,255,255,.08); border-radius: 20px; padding: 32px 26px; border: 1px solid rgba(255,255,255,.12); text-align: center; }
+    .trust-icon { font-size: 2.5rem; margin-bottom: 16px; }
+    .trust-card h4 { font-family: var(--font-display); font-size: 1.1rem; color: var(--white); margin-bottom: 10px; }
+    .trust-card p { font-size: .88rem; color: rgba(255,255,255,.6); line-height: 1.65; }
+
+    /* TEAM */
+    .team-intro { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+    .team-card { background: var(--white); border-radius: 20px; padding: 32px 24px; text-align: center; border: 1.5px solid var(--cream-dark); transition: all .3s; }
+    .team-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--green-light); }
+    .team-avatar { width: 72px; height: 72px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin: 0 auto 16px; }
+    .team-card h4 { font-family: var(--font-display); font-size: 1.1rem; color: var(--green); margin-bottom: 4px; }
+    .team-role { font-size: .82rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 12px; }
+    .team-card p { font-size: .88rem; color: var(--muted); line-height: 1.65; }
+
+    /* FAQ */
+    .faq-list { max-width: 760px; }
+    .faq-item { border-bottom: 1px solid var(--cream-dark); }
+    .faq-q { width: 100%; text-align: left; padding: 20px 0; font-family: var(--font-body); font-size: 1rem; font-weight: 600; color: var(--green); background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .faq-q .arrow { font-size: 1.1rem; transition: transform .3s; flex-shrink: 0; }
+    .faq-q.open .arrow { transform: rotate(180deg); }
+    .faq-a { display: none; padding: 0 0 20px; font-size: .93rem; color: var(--muted); line-height: 1.75; }
+    .faq-a.open { display: block; }
+
+    /* CTA */
+    .cta-strip { background: var(--green); padding: 72px 5%; text-align: center; }
+    .cta-strip h2 { font-family: var(--font-display); font-size: 2.4rem; color: var(--white); margin-bottom: 14px; }
+    .cta-strip p { color: rgba(255,255,255,.65); font-size: 1rem; margin-bottom: 36px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.65; }
+    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-lg { padding: 14px 36px; border-radius: 100px; font-family: var(--font-body); font-size: 1rem; font-weight: 600; cursor: pointer; transition: all .2s; text-decoration: none; display: inline-block; }
+    .btn-lg-white { background: var(--white); color: var(--green); border: none; }
+    .btn-lg-white:hover { background: var(--cream); transform: translateY(-2px); }
+    .btn-lg-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.5); }
+    .btn-lg-outline:hover { border-color: var(--white); background: rgba(255,255,255,.1); }
+
+    /* FOOTER */
+    footer { background: var(--charcoal); color: var(--white); padding: 48px 5% 28px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .footer-brand p { font-size: .88rem; color: rgba(255,255,255,.5); line-height: 1.65; max-width: 260px; margin-top: 12px; }
+    .footer-col h5 { font-size: .78rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .footer-col a { display: block; font-size: .88rem; color: rgba(255,255,255,.5); text-decoration: none; margin-bottom: 10px; transition: color .2s; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom { padding-top: 24px; display: flex; justify-content: space-between; font-size: .82rem; color: rgba(255,255,255,.35); }
+
+    @media (max-width: 900px) {
+      .page-hero-inner { grid-template-columns: 1fr; }
+      .two-col, .team-intro, .trust-grid { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .stats-box { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .values-grid, .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="logo">Sparkle<span>Up</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#how">How it works</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="index.html#pricing">Pricing</a></li>
+    <li><a href="about.html" class="active">About Us</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="index.html#signup" class="btn-outline">Sign Up</a>
+    <a href="index.html#signup" class="btn-primary">Get a Cleaner</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div>
+      <div class="page-tag">About SparkleUp</div>
+      <h1>We're building Ghana's most <em>trusted</em> cleaning network.</h1>
+      <p>SparkleUp was born out of a simple frustration: finding a reliable, professional cleaner in Accra was too hard. We built the platform that makes it effortless — for clients and cleaners alike.</p>
+      <p>We don't just connect people. We vet, train, match, and stand behind every single clean we facilitate.</p>
+    </div>
+    <div class="stats-box">
+      <div class="stat-item">
+        <div class="num">500+</div>
+        <div class="lbl">Active weekly clients across Accra</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">120+</div>
+        <div class="lbl">Verified cleaners on the platform</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">4.9★</div>
+        <div class="lbl">Average cleaner rating across all cleans</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">98%</div>
+        <div class="lbl">Client satisfaction rate</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MISSION & VALUES -->
+<section class="content-section" id="mission">
+  <div class="section-inner">
+    <div class="two-col">
+      <div class="mission-text">
+        <div class="section-tag">Our Mission</div>
+        <h2 class="section-title">Why SparkleUp exists.</h2>
+        <p>Millions of Ghanaian households need regular cleaning support — and millions of skilled cleaners need reliable, dignified work. SparkleUp bridges that gap with technology, trust, and transparency.</p>
+        <div class="blockquote">"A clean home isn't a luxury — it's a foundation for a better life. We're here to make that accessible to everyone."</div>
+        <p>We believe cleaners deserve fair pay, consistent work, and professional respect. And we believe homeowners deserve a service they can truly rely on week after week. SparkleUp was built to deliver both.</p>
+      </div>
+      <div>
+        <div class="section-tag">Our Values</div>
+        <h3 style="font-family: var(--font-display); font-size: 1.4rem; color: var(--green); margin-bottom: 24px;">What drives everything we do.</h3>
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="value-icon">🤝</div>
+            <h4>Trust First</h4>
+            <p>Every decision we make — from vetting to pricing — is built on earning and keeping trust.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">⭐</div>
+            <h4>Quality Always</h4>
+            <p>We don't compromise on standards. Every clean is checked, rated and reviewed.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">💚</div>
+            <h4>Dignity for Cleaners</h4>
+            <p>We treat our cleaners as professionals — fair pay, clear expectations, real support.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">🔍</div>
+            <h4>Full Transparency</h4>
+            <p>No hidden fees, no surprises. Clients and cleaners always know where they stand.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW THE SERVICE OPERATES -->
+<section class="content-section bg-cream" id="how-it-works">
+  <div class="section-inner">
+    <div class="section-tag">How It Works</div>
+    <h2 class="section-title">How SparkleUp operates — in detail.</h2>
+    <p class="section-sub">From your first signup to your 100th weekly clean — here's exactly how our platform works behind the scenes.</p>
+
+    <div class="two-col">
+      <div>
+        <h3 style="font-family: var(--font-display); color: var(--green); font-size: 1.3rem; margin-bottom: 28px;">For Clients 🏠</h3>
+        <div class="process-timeline">
+          <div class="process-step">
+            <div class="step-dot">1</div>
+            <h4>You Sign Up & Tell Us Your Needs</h4>
+            <p>Fill in your address, home size, preferred days, and upload your Ghana Card or valid ID for verification.</p>
+            <div class="step-detail">Your ID is used solely for trust and safety. It's encrypted, stored securely, and never shared with cleaners.</div>
+          </div>
+          <div class="process-step">
+            <div class="step-dot">2</div>
+            <h4>We Match You with a Cleaner</h4>
+            <p>Our system matches you with a verified cleaner nearby who is available on your preferred days and has the right experience for your home type.</p>
+            <div class="step-detail">Matching happens within 24 hours. You'll receive an SMS with your cleaner's name, rating, and first visit date.</div>
+          </div>
+          <div class="process-step">
+            <div class="step-dot">3</div>
+            <h4>Your First Clean Happens</h4>
+            <p>Your matched cleaner arrives, follows the SparkleUp checklist, and completes the job. You receive a notification when they arrive and when they finish.</p>
+            <div class="step-detail">First cleans are treated as a trial. If you're not satisfied, we rematch you within 48 hours at no charge.</div>
+          </div>
+          <div class="process-step">
+            <div class="step-dot">4</div>
+            <h4>You Rate the Clean</h4>
+            <p>After every visit you rate your cleaner from 1–5 stars and leave optional notes. This keeps quality high and gives cleaners real feedback.</p>
+          </div>
+          <div class="process-step">
+            <div class="step-dot">5</div>
+            <h4>It Repeats — Automatically</h4>
+            <p>Your same cleaner returns every week on your chosen day. Reschedule, pause, or cancel anytime with 24 hours' notice via SMS or WhatsApp.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="font-family: var(--font-display); color: var(--green); font-size: 1.3rem; margin-bottom: 28px;">For Cleaners 🧹</h3>
+        <div class="process-timeline">
+          <div class="process-step">
+            <div class="step-dot">1</div>
+            <h4>You Apply & Submit Your ID</h4>
+            <p>Fill in the cleaner application form with your experience, availability, and area. Upload a valid government ID — Ghana Card, Passport, Voter's ID or Driver's Licence.</p>
+            <div class="step-detail">Applications are reviewed within 2 business days. Incomplete or unverified applications are not accepted.</div>
+          </div>
+          <div class="process-step">
+            <div class="step-dot">2</div>
+            <h4>Background Check & Vetting</h4>
+            <p>Our team runs a background verification using your ID, calls your reference contact, and reviews your experience history.</p>
+            <div class="step-detail">This typically takes 3–5 business days. We may request a video call or in-person interview for applicants in certain areas.</div>
+          </div>
+          <div class="process-step">
+            <div class="step-dot">3</div>
+            <h4>Onboarding & Training</h4>
+            <p>Approved cleaners receive the SparkleUp Standards Guide — our room-by-room cleaning checklist, conduct rules, and safety protocols.</p>
+            <div class="step-detail">You complete a short online test and a supervised trial clean before going live on the platform.</div>
+          </div>
+          <div class="process-step">
+            <div class="step-dot">4</div>
+            <h4>You Receive Job Assignments</h4>
+            <p>Once active, you receive client assignments that match your location and availability. You'll be notified 48 hours before each job.</p>
+            <div class="step-detail">Cleaners keep a consistent client so relationships and trust can build over time — better for everyone.</div>
+          </div>
+          <div class="process-step">
+            <div class="step-dot">5</div>
+            <h4>You Get Paid Weekly</h4>
+            <p>Payment is released every Friday via Mobile Money (MTN MoMo or Vodafone Cash) for all completed cleans that week.</p>
+            <div class="step-detail">Cleaners with a 4.5+ rating are eligible for SparkleUp Top Rated status and bonus pay on premium jobs.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST & SAFETY -->
+<section class="content-section bg-green" id="trust">
+  <div class="section-inner">
+    <div class="section-tag">Trust & Safety</div>
+    <h2 class="section-title light">How we keep everyone safe.</h2>
+    <p class="section-sub light">Safety is not optional at SparkleUp. Here are the measures we take to protect both clients and cleaners.</p>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="trust-icon">🪪</div>
+        <h4>ID Verification for All</h4>
+        <p>Every client and cleaner must submit a valid government-issued ID before using the platform. No exceptions.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">🔍</div>
+        <h4>Background Checks</h4>
+        <p>Cleaners undergo a thorough background check before being approved. We verify identity, references, and conduct history.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">⭐</div>
+        <h4>Two-Way Rating System</h4>
+        <p>Clients rate cleaners — and cleaners can flag unsafe or disrespectful client situations. Both parties are accountable.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">📍</div>
+        <h4>Job Location Logging</h4>
+        <p>Every job is logged with time, location, and cleaner ID. Our team can trace any job within seconds if an issue arises.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">💬</div>
+        <h4>24/7 Support Line</h4>
+        <p>Got a concern mid-clean? Our support team is reachable via WhatsApp, SMS or phone — any time of day.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">🛡️</div>
+        <h4>Damage Protection Policy</h4>
+        <p>If a cleaner accidentally damages something in your home, SparkleUp's damage policy covers fair resolution and compensation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="content-section" id="team">
+  <div class="section-inner">
+    <div class="section-tag">The Team</div>
+    <h2 class="section-title">The people behind SparkleUp.</h2>
+    <p class="section-sub">A small but dedicated team based in Accra, committed to building a service that truly works for Ghana.</p>
+    <div class="team-intro">
+      <div class="team-card">
+        <div class="team-avatar">👨🏾‍💻</div>
+        <h4>Kojo Bismark</h4>
+        <div class="team-role">Founder & Developer</div>
+        <p>Built SparkleUp from the ground up. Passionate about using tech to solve everyday Ghanaian problems.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">👩🏾‍💼</div>
+        <h4>Operations Lead</h4>
+        <div class="team-role">Cleaner Vetting & Matching</div>
+        <p>Oversees all cleaner onboarding, quality checks, and client-cleaner matching to ensure the best experience.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">👨🏾‍🎧</div>
+        <h4>Support Team</h4>
+        <div class="team-role">Client & Cleaner Support</div>
+        <p>Available every day to resolve issues, handle rescheduling and ensure both clients and cleaners are taken care of.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="content-section bg-cream" id="faq">
+  <div class="section-inner">
+    <div class="section-tag">FAQ</div>
+    <h2 class="section-title">Frequently asked questions.</h2>
+    <p class="section-sub">Quick answers to the things people ask us most.</p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What areas in Accra do you currently serve? <span class="arrow">▾</span></button>
+        <div class="faq-a">We currently operate across Greater Accra including East Legon, Spintex, Tema, Airport Residential, Osu, Labone, Cantonments, Achimota, Adenta, and Madina. We are expanding — contact us if your area isn't listed.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can I request a different cleaner if I'm not happy? <span class="arrow">▾</span></button>
+        <div class="faq-a">Yes. If you're unsatisfied after your first clean, we rematch you within 48 hours at no extra cost. For ongoing plans, you can request a rematch at any time through our support line.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is my Ghana Card safe when I upload it? <span class="arrow">▾</span></button>
+        <div class="faq-a">Absolutely. Your ID is used only for identity verification. It is encrypted, stored on secure servers, and is never shared with cleaners, third parties, or anyone outside our internal verification team.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How do I pay for the service? <span class="arrow">▾</span></button>
+        <div class="faq-a">We accept Mobile Money (MTN MoMo, Vodafone Cash, AirtelTigo Money) and bank transfer. Payment is due before each scheduled clean. Weekly subscription clients are billed automatically every Monday.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What if I need to reschedule or cancel? <span class="arrow">▾</span></button>
+        <div class="faq-a">You can reschedule or cancel any clean with at least 24 hours' notice via WhatsApp or SMS — no penalty. Cancellations with less than 24 hours' notice may incur a small fee to cover the cleaner's lost earnings.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How much do cleaners earn on SparkleUp? <span class="arrow">▾</span></button>
+        <div class="faq-a">Cleaners earn a fair hourly rate that is above the national minimum wage. Earnings vary by job type and frequency. Top-rated cleaners with consistent bookings can earn a full-time income through SparkleUp alone.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Do I need to be home during the clean? <span class="arrow">▾</span></button>
+        <div class="faq-a">No — many of our clients provide a key or gate code and are not home during the clean. Our cleaners are fully vetted and all jobs are logged for accountability. You'll receive a notification when the clean is complete.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-strip">
+  <h2>Come be part of SparkleUp.</h2>
+  <p>Whether you need a spotless home or want to earn as a professional cleaner — we'd love to have you.</p>
+  <div class="cta-btns">
+    <a href="index.html#signup" class="btn-lg btn-lg-white">Book a Clean</a>
+    <a href="index.html#signup" class="btn-lg btn-lg-outline">Apply as a Cleaner</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">Sparkle<span>Up</span></a>
+        <p>Connecting Accra homes with trusted, professional cleaners — every single week.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <a href="services.html#home-services" target="_blank" rel="noopener">Weekly Cleaning</a>
+        <a href="services.html#home-services" target="_blank" rel="noopener">Deep Cleaning</a>
+        <a href="services.html#home-services" target="_blank" rel="noopener">Move-In / Out</a>
+        <a href="services.html#office-cleaning" target="_blank" rel="noopener">Office Cleaning</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="about.html" target="_blank" rel="noopener">About Us</a>
+        <a href="index.html#how" target="_blank" rel="noopener">How It Works</a>
+        <a href="index.html#pricing" target="_blank" rel="noopener">Pricing</a>
+        <a href="#" target="_blank" rel="noopener">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a href="mailto:hello@sparkleup.com.gh" target="_blank" rel="noopener">hello@sparkleup.com.gh</a>
+        <a href="tel:+233XXXXXXX">+233 XX XXX XXXX</a>
+        <a href="#" target="_blank" rel="noopener">WhatsApp Us</a>
+        <a href="#" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 SparkleUp Ghana. Built by Kojo Bismark.</span>
+      <span>Privacy · Terms · Cookies</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+    document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-q').forEach(q => q.classList.remove('open'));
+    if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); }
+  }
+</script>
+</body>
+</html>
